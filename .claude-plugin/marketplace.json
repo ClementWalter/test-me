@@ -1,0 +1,15 @@
+{
+  "name": "test-me",
+  "owner": { "name": "Clément Walter" },
+  "metadata": {
+    "description": "test-me: make the human prove they understand a plan before Claude executes it."
+  },
+  "plugins": [
+    {
+      "name": "test-me",
+      "description": "Grill the human on what they asked before acting on a go-ahead like \"ok let's do\".",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}

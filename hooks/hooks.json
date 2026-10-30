@@ -1,0 +1,16 @@
+{
+  "description": "Route a bare go-ahead prompt to the test-me skill.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/test_me_trigger.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
