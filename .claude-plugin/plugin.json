@@ -1,6 +1,6 @@
 {
   "name": "test-me",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Grill the human on what they asked before acting on a go-ahead like \"ok let's do\".",
   "author": { "name": "Clément Walter" },
   "repository": "https://github.com/ClementWalter/test-me",

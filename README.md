@@ -9,8 +9,10 @@ tells Claude to run the `test-me` skill first. Claude then:
 
 1. restates the plan in one line;
 2. asks 2 to 4 pointed questions about it (what changes, what cannot be undone,
-   scope, how you will check it, cost, why this option), with no hints;
-3. grades each answer ✅ / ⚠️ / ❌ and re-asks on weak points;
+   scope, how you will check it, cost, why this option) in one
+   `AskUserQuestion` dialog: multiple choice where the wrong options are
+   realistic misreadings of the plan, plus "Other" to answer in your own words;
+3. grades each answer ✅ / ⚠️ / ❌ and re-asks weak points with fresh questions;
 4. executes only once you pass.
 
 Add `no test` or `skip test` to a go-ahead to bypass it. You are not examined
