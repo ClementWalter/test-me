@@ -7,12 +7,17 @@ When you approve the plan Claude just proposed ("ok let's do", "go ahead but
 rename it first", "vas-y", "sounds good, ship it"), a `UserPromptSubmit` hook
 tells Claude to run the `test-me` skill first. Claude then:
 
-1. restates the plan in one line;
-2. asks 2 to 4 pointed questions about it (what changes, what cannot be undone,
-   scope, how you will check it, cost, why this option) in one
-   `AskUserQuestion` dialog: multiple choice where the wrong options are
-   realistic misreadings of the plan, plus "Other" to answer in your own words;
-3. grades each answer ✅ / ⚠️ / ❌ and re-asks weak points with fresh questions;
+1. checks any fact the plan assumes about your situation that you never
+   confirmed;
+2. restates the plan in one line and asks 2 or 3 plain questions about your
+   decision (what changes, what cannot be undone, what is left out, what you
+   will have to do, why this option) in one `AskUserQuestion` dialog. The
+   questions cover outcomes, not how things work: no code names, no arithmetic.
+   Options are short and the wrong ones are the alternative plans, plus "Other"
+   to answer in your own words;
+3. grades each answer ✅ / ⚠️ / ❌. An "Other" answer that changes the plan
+   changes the plan. "I don't understand" makes Claude rewrite the question. A
+   point missed twice gets explained, then Claude asks whether to go ahead;
 4. executes only once you pass.
 
 Add `no test` or `skip test` to a go-ahead to bypass it. You are not examined
@@ -21,16 +26,16 @@ twice on the same plan in one conversation. You can also run it on demand with
 
 ## How a go-ahead is detected
 
-1. **Cheap gate.** Only prompts under 200 characters containing an
-   approval-ish word (ok, yes, go, do, proceed, ship, lgtm, vas, allez, …) go
-   further. Everything else passes instantly.
+1. **Cheap gate.** Only prompts under 200 characters containing an approval-ish
+   word (ok, yes, go, do, proceed, ship, lgtm, vas, allez, …) go further.
+   Everything else passes instantly.
 2. **Context.** The hook reads Claude's last message from the session
    transcript. No message, no plan, no exam.
 3. **Model.** Haiku, through your own logged-in `claude` CLI (no API key, hooks
    disabled in the nested call, no session saved), reads that message and your
-   reply and answers APPROVE or OTHER. So "don't do it" or "let's go back to
-   the other file" do not trigger, while "ok go ahead but rename it first"
-   does. This adds about 2 seconds to candidate prompts only.
+   reply and answers APPROVE or OTHER. So "don't do it" or "let's go back to the
+   other file" do not trigger, while "ok go ahead but rename it first" does.
+   This adds about 2 seconds to candidate prompts only.
 4. **Fallback.** If the CLI is missing, fails or times out, a strict regex
    accepts only a bare approval ("go", "ok let's do it", "vas-y").
 
