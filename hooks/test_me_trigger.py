@@ -70,9 +70,10 @@ Answer with exactly one word: APPROVE or OTHER."""
 
 CONTEXT = (
     "The human just gave a go-ahead. Before executing anything, invoke the "
-    "`test-me` skill and grill them on the plan they are approving. Execute "
-    "only once they pass. If they already passed an exam on this exact plan "
-    "in this conversation, execute directly."
+    "`test-me` skill: first ask whether they want to be tested on the plan "
+    "they are approving; if they skip, execute; otherwise grill them and "
+    "execute only once they pass. If they already passed an exam on this "
+    "exact plan in this conversation, execute directly."
 )
 
 

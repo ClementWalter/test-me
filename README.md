@@ -7,22 +7,24 @@ When you approve the plan Claude just proposed ("ok let's do", "go ahead but
 rename it first", "vas-y", "sounds good, ship it"), a `UserPromptSubmit` hook
 tells Claude to run the `test-me` skill first. Claude then:
 
-1. checks any fact the plan assumes about your situation that you never
+1. asks "should I test you?" in one dialog: pick `Skip, just do it` and Claude
+   executes right away, pick `Test me` for the exam below;
+2. checks any fact the plan assumes about your situation that you never
    confirmed;
-2. restates the plan in one line and asks 2 or 3 plain questions about your
+3. restates the plan in one line and asks 2 or 3 plain questions about your
    decision (what changes, what cannot be undone, what is left out, what you
    will have to do, why this option) in one `AskUserQuestion` dialog. The
    questions cover outcomes, not how things work: no code names, no arithmetic.
    Options are short and the wrong ones are the alternative plans, plus "Other"
    to answer in your own words;
-3. grades each answer ✅ / ⚠️ / ❌. An "Other" answer that changes the plan
+4. grades each answer ✅ / ⚠️ / ❌. An "Other" answer that changes the plan
    changes the plan. "I don't understand" makes Claude rewrite the question. A
    point missed twice gets explained, then Claude asks whether to go ahead;
-4. executes only once you pass.
+5. executes only once you pass.
 
-Add `no test` or `skip test` to a go-ahead to bypass it. You are not examined
-twice on the same plan in one conversation. You can also run it on demand with
-`/test-me`.
+Add `no test` or `skip test` to a go-ahead to bypass even the question. You are
+not examined twice on the same plan in one conversation. You can also run it on
+demand with `/test-me`.
 
 ## How a go-ahead is detected
 

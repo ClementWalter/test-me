@@ -22,6 +22,24 @@ whom, what cannot be undone, what is left out, what they will have to do. The
 most valuable outcome is an answer that shows the plan is not what they want.
 Then the plan changes, not the human.
 
+## First, ask whether to test
+
+The exam is opt-in. Before anything else, ask one `AskUserQuestion` question
+with `header` `Test me?`:
+
+- question: "Before I go ahead with <the plan in a few words>, should I test
+  you on it?"
+- options, in this order: `Test me` ("2 or 3 quick questions first") and
+  `Skip, just do it` ("execute right away").
+
+On `Skip, just do it`, say "Skipping the exam." once and execute the plan. On
+`Test me`, run the exam below. An "Other" answer that changes the plan changes
+the plan; ask again only if a plan is still on the table.
+
+Skip this question entirely, and go straight to the exam, when the human asked
+for it explicitly (`/test-me`, "test me"). Skip both the question and the exam
+when the prompt already says to bypass (see "When not to grill").
+
 ## Before asking
 
 1. **Check the premises.** List the facts about their world that the plan relies
@@ -83,7 +101,8 @@ not answer it from the conversation alone, rewrite it or drop it.
 
 If `AskUserQuestion` is not available (a remote human, see below, or a session
 without the tool), ask the same questions as plain text in one numbered message,
-open-ended with no options, and wait for the reply.
+open-ended with no options, and wait for the reply. The opening "should I test
+you?" becomes a one-line yes/no message the same way.
 
 ## Grading
 
